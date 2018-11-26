@@ -1,0 +1,19 @@
+---
+  
+- hosts: localhost
+  vars:
+    nios_provider:
+      host: hostname/hostip
+      username: admin
+      password: admin
+
+  connection: local
+  tasks:
+   - name: Create Nios TXT record
+     nios_txt_record:
+       name: fqdn.txt.ansible.com
+       text: example_text
+       view: default
+       comment: Created with Ansible
+       state: present
+       provider: "{{ nios_provider }}"
