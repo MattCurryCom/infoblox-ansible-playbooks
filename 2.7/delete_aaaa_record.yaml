@@ -1,0 +1,18 @@
+---
+
+- hosts: localhost
+  vars:
+    nios_provider:
+      host: hostname/hostip
+      username: admin
+      password: admin
+
+  connection: local
+  tasks:
+   - name: Create Nios AAAA record
+     nios_aaaa_record:
+       name: aaaa.ansible.com
+       ipv6addr: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
+       comment: Created with Ansible
+       state: delete
+       provider: "{{ nios_provider }}"

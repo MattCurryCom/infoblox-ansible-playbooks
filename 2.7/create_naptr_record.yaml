@@ -1,0 +1,20 @@
+---
+  
+- hosts: localhost
+  vars:
+    nios_provider:
+      host: hostname/hostip
+      username: admin
+      password: admin
+
+  connection: local
+  tasks:
+   - name: Create Nios NAPTR record
+     nios_naptr_record:
+       name: '*.subscriber-100.ansible.com'
+       order: 1000
+       preference: 10
+       replacement: replacement1.network.ansible.com
+       comment: Created with Ansible
+       state: present
+       provider: "{{ nios_provider }}"

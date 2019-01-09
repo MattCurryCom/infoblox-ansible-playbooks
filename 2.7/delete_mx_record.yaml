@@ -1,0 +1,19 @@
+---
+  
+- hosts: localhost
+  vars:
+    nios_provider:
+      host: hostname/hostip
+      username: admin
+      password: admin
+
+  connection: local
+  tasks:
+   - name: Create Nios MX record
+     nios_mx_record:
+       name: ansible.com
+       mx: mailhost.ansible.com
+       preference: 0
+       comment: Created with Ansible
+       state: absent
+       provider: "{{ nios_provider }}"

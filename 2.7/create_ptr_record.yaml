@@ -1,0 +1,18 @@
+---
+  
+- hosts: localhost
+  vars:
+    nios_provider:
+      host: hostname/hostip
+      username: admin
+      password: admin
+
+  connection: local
+  tasks:
+   - name: Create Nios PTR record
+     nios_ptr_record:
+       ipv4: 192.168.10.1
+       ptrdname: host.ansible.com
+       comment: Created with Ansible
+       state: present
+       provider: "{{ nios_provider }}"
