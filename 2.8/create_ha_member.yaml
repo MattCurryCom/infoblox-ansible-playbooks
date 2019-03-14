@@ -3,7 +3,7 @@
 - hosts: localhost
   vars:
     nios_provider:
-      host: 10.196.200.81
+      host: 127.0.0.1
       username: cloud-admin
       password: infoblox
       wapi_version: 2.9
