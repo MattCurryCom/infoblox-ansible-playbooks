@@ -1,0 +1,17 @@
+---
+
+- hosts: localhost
+  vars:
+    nios_provider:
+      host: 10.196.200.81
+      username: admin
+      password: infoblox
+      wapi_version: 2.9
+
+  connection: local
+  tasks:
+   - name: Delete Infoblox member
+     nios_member:
+       name: member-ha.ansible-dev.com 
+       state: absent
+       provider: "{{ nios_provider }}"

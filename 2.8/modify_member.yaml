@@ -1,0 +1,29 @@
+---
+
+- hosts: localhost
+  vars:
+    nios_provider:
+      host: 10.196.200.81
+      username: cloud-admin
+      password: infoblox
+      wapi_version: 2.9
+
+  connection: local
+  tasks:
+   - name: Modify Infoblox member
+     nios_member:
+       host_name: member01.ansible-dev.com
+       pre_provisioning:
+         hardware_info:
+           - hwmodel: IB-VM-820
+             hwtype: IB-VNIOS
+         licenses:
+           - dns
+           - dhcp
+           - enterprise
+           - vnios
+           - rpz
+       platform: VNIOS
+       comment: Created with Ansible
+       state: present
+       provider: "{{ nios_provider }}"

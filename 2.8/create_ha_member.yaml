@@ -1,0 +1,33 @@
+---
+
+- hosts: localhost
+  vars:
+    nios_provider:
+      host: 10.196.200.81
+      username: cloud-admin
+      password: infoblox
+      wapi_version: 2.9
+
+  connection: local
+  tasks:
+   - name: Create Infoblox HA member
+     nios_member:
+       host_name: member-ha.ansible-dev.com
+       vip_setting:
+         address: 192.168.1.110
+         subnet_mask: 255.255.255.0
+         gateway: 192.168.1.1
+       config_addr_type: IPV4
+       platform: VNIOS
+       enable_ha: true
+       router_id: 150
+       node_info:
+        - lan_ha_port_setting:
+            ha_ip_address: 192.168.1.70
+            mgmt_lan: 192.168.1.80
+        - lan_ha_port_setting:
+            ha_ip_address: 192.168.1.71
+            mgmt_lan: 192.168.1.81
+       comment: "Created by Ansible"
+       state: present
+       provider: "{{ nios_provider }}"

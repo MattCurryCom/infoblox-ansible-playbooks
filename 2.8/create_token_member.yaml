@@ -1,0 +1,22 @@
+---
+
+- hosts: localhost
+  vars:
+    nios_provider:
+      host: 10.196.200.81
+      username: admin
+      password: infoblox
+      wapi_version: 2.9
+
+  connection: local
+  tasks:
+   - name: Create token for Infoblox member
+     nios_member:
+       name: member01.ansible-dev.com
+       create_token: true
+       state: present
+       provider: "{{ nios_provider }}"
+     register: wapi_result
+
+   - debug:
+       var: wapi_result
