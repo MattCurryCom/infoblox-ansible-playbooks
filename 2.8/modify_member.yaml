@@ -14,15 +14,15 @@
      nios_member:
        host_name: member01.ansible-dev.com
        pre_provisioning:
-         hardware_info:
-           - hwmodel: IB-VM-820
-             hwtype: IB-VNIOS
-         licenses:
-           - dns
-           - dhcp
-           - enterprise
-           - vnios
-           - rpz
+         - hardware_info:
+             - hwmodel: IB-VM-820
+               hwtype: IB-VNIOS
+           licenses:
+             - dns
+             - dhcp
+             - enterprise
+             - vnios
+             - rpz
        platform: VNIOS
        comment: Created with Ansible
        state: present
