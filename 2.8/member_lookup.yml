@@ -1,0 +1,33 @@
+---
+
+- hosts: localhost
+  vars:
+    nios_provider:
+      host: 127.0.0.1
+      username: admin
+      password: infoblox
+
+  connection: local
+  tasks:
+# Get the list of grid members
+   - name: get member list
+     set_fact:
+       members: "{{ lookup('nios', 'member', provider=nios_provider) }}"
+   - name: display all members
+     debug:
+       msg: "{{ members }}"
+# Get a grid member using its name
+   - name: get member 
+     set_fact:
+       members: "{{ lookup('nios', 'member', filter={'host_name': 'member01.ansible-dev.com'}, provider=nios_provider) }}"
+   - name: display member member01.ansible-dev.com
+     debug:
+       msg: "{{ members }}"
+# Get additional details of a grid member
+   - name: fetch additional details
+     set_fact:
+       members: "{{ lookup('nios', 'member', filter={'host_name': 'member01.ansible-dev.com'}, return_fields=['host_name','vip_setting'], provider=nios_provider) }}"
+   - name: display additional details for member01.ansible-dev.com
+     debug:
+       msg: "{{ members }}"
+
